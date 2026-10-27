@@ -12,6 +12,37 @@ const rooms = {
       137: "iron-door-middle",
       138: "iron-door-right"
     }
+  },
+
+  room3: {
+    playerStart: 79,
+    doorTiles: {
+      64: "floor",
+      80: "floor",
+      96: "floor"
+    },
+    objects: {
+      18: "tiles/Obed-T1.png",
+      19: "tiles/Obed-T2.png",
+      34: "tiles/Obed-M1.png",
+      35: "tiles/Obed-M2.png",
+      50: "tiles/Obed-B1.png",
+      51: "tiles/Obed-B2.png",
+
+      21: "tiles/Pbed-T1.png",
+      22: "tiles/Pbed-T2.png",
+      37: "tiles/Pbed-M1.png",
+      38: "tiles/Pbed-M2.png",
+      53: "tiles/Pbed-B1.png",
+      54: "tiles/Pbed-B2.png",
+
+      24: "tiles/Gbed-T1.png",
+      25: "tiles/Gbed-T2.png",
+      40: "tiles/Gbed-M1.png",
+      41: "tiles/Gbed-M2.png",
+      56: "tiles/Gbed-B1.png",
+      57: "tiles/Gbed-B2.png"
+    }
   }
 };
 
@@ -32,6 +63,8 @@ const keyDirections = {
   a: "left",
   d: "right"
 };
+
+const blockedTiles = [];
 
 let playerTile = 0;
 
@@ -69,6 +102,15 @@ function createTiles() {
       tile.classList.add("wall");
     } else {
       tile.classList.add("floor");
+    }
+
+    const objectImage = (roomLayout.objects || {})[id];
+
+    if (objectImage) {
+      tile.classList.add("object");
+      tile.style.setProperty("--object-image", 'url("' + objectImage + '")');
+
+      blockedTiles.push(id);
     }
 
     room.appendChild(tile);
@@ -113,6 +155,9 @@ function movePlayer(direction) {
 
   const newTileId = playerTile + moves[direction];
   const newTile = document.getElementById("t" + newTileId);
+  if (blockedTiles.includes(newTileId)) {
+    return;
+  }
 
   if (!newTile.classList.contains("floor")) {
     return;
