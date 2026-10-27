@@ -74,6 +74,9 @@ body {
   background-image: url("tiles/floor_tile.png");
 }
 
+.object {
+  background-image: var(--object-image), url("tiles/floor_tile.png");
+}
 .wood-door-left {
   background-image: url("tiles/wood_door_left.png");
 }
