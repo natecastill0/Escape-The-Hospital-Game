@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -74,25 +75,40 @@ body {
 }
 
 .wood-door-left {
-  background-image: url("tiles/wood_door_left_tile.png");
+  background-image: url("tiles/wood_door_left.png");
 }
 
 .wood-door-middle {
-  background-image: url("tiles/wood_door_middle_tile.png");
+  background-image: url("tiles/wood_door_mid.png");
 }
 
 .wood-door-right {
-  background-image: url("tiles/wood_door_right_tile.png");
+  background-image: url("tiles/wood_door_right.png");
 }
 
 .iron-door-left {
-  background-image: url("tiles/iron_door_left_tile.png");
+  background-image: url("tiles/iron_door_left.png");
 }
 
 .iron-door-middle {
-  background-image: url("tiles/iron_door_middle_tile.png");
+  background-image: url("tiles/iron_door_mid.png");
 }
 
 .iron-door-right {
-  background-image: url("tiles/iron_door_right_tile.png");
+  background-image: url("tiles/iron_door_right.png");
+}
+
+#player {
+  width: 100%;
+  height: 100%;
+  background-image: url("sprites/player.png");
+  background-size: 100% 100%;
+}
+
+#player.facing-left {
+  background-image: url("sprites/playerL.png");
+}
+
+#player.facing-right {
+  background-image: url("sprites/playerR.png");
 }
