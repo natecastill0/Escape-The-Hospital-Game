@@ -152,24 +152,6 @@ body {
   margin-bottom: 5%;
 }
 
-#modal-close {
-  padding: 2% 6%;
-  font-size: 1.1rem;
-  color: white;
-  background-color: #8b0000;
-  border: none;
-  cursor: pointer;
-}
-
-#modal-close:hover {
-  background-color: #b00000;
-}
-
-#modal-close:active {
-  background-color: #600000;
-}
-
-
 #modal-image.hidden {
   display: none;
 }
