@@ -10,7 +10,7 @@ const rooms = {
       10: "wood-door-right",
       136: "iron-door-left",
       137: "iron-door-middle",
-      138: "iron-door-right"
+      138: "iron-door-right",
     }
   },
 
@@ -219,6 +219,7 @@ function openModal(text, image) {
 
   document.getElementById("modal").classList.remove("hidden");
   modalOpen = true;
+    CompPuz();
 }
 
 function closeModal() {
@@ -255,6 +256,17 @@ const modalClose = document.getElementById("modal-close");
 
 if (modalClose) {
   modalClose.addEventListener("click", closeModal);
+}
+
+function CompPuz() {
+  const password = 'opg'
+  let entry = prompt("enter password: ").replace(/\s/g, "").toLowerCase()
+  if (entry == password){
+    alert("correct")
+  }else{
+    alert("incorrect")
+  }
+
 }
 
 createTiles();
