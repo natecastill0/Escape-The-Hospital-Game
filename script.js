@@ -49,7 +49,8 @@ const rooms = {
     },
     interactables: {
       28: "desk",
-      29: "desk"
+      29: "desk",
+      127: "mop"
     }
   }
 };
@@ -72,8 +73,6 @@ const keyDirections = {
   d: "right"
 };
 
-const blockedTiles = [];
-
 const messages = {};
 
 const images = {
@@ -83,13 +82,14 @@ const images = {
 };
 
 let interactables = {};
+let blockedTiles = [];
 let modalOpen = false;
 let deskSolved = false;
-
 let playerTile = 0;
 
 const player = document.createElement("div");
 player.id = "player";
+
 
 function createTiles() {
   const room = document.getElementById("room");
@@ -141,6 +141,7 @@ function createTiles() {
   document.getElementById("t" + playerTile).appendChild(player);
 }
 
+
 function canMove(tileId, direction) {
   if (direction === "left" && tileId % columns === 1) {
     return false;
@@ -189,6 +190,7 @@ function movePlayer(direction) {
   playerTile = newTileId;
 }
 
+
 function getNearbyInteractable() {
   for (const direction in moves) {
     if (!canMove(playerTile, direction)) {
@@ -204,6 +206,7 @@ function getNearbyInteractable() {
 
   return null;
 }
+
 
 function openModal(text, image) {
   const modalImage = document.getElementById("modal-image");
@@ -229,6 +232,7 @@ function closeModal() {
   modalOpen = false;
 }
 
+
 function openDesk() {
   openModal("", deskSolved ? images.cDesk : images.sDesk);
 
@@ -249,6 +253,8 @@ function CompPuz() {
   }
 }
 
+ let equiped = false;
+
 document.addEventListener("keydown", function (event) {
   if (modalOpen) {
     if (event.key === "e" || event.key === "Escape") {
@@ -260,11 +266,20 @@ document.addEventListener("keydown", function (event) {
   if (event.key === "e") {
     const name = getNearbyInteractable();
 
+
     if (name === "desk") {
       openDesk();
-    } else if (name) {
-      openModal(messages[name], images[name]);
+    } else if (name === "mop"){
+      if (equiped == false){
+        alert ("you are holding a mop now")
+        equiped = true;
+      }else if (equiped == true){
+        alert ("you put the mop back")
+        equiped = false;
+      }
     }
+
+
     return;
   }
 
@@ -276,10 +291,12 @@ document.addEventListener("keydown", function (event) {
   }
 });
 
+
 const modalClose = document.getElementById("modal-close");
 
 if (modalClose) {
   modalClose.addEventListener("click", closeModal);
 }
+
 
 createTiles();
