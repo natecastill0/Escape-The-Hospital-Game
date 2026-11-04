@@ -10,7 +10,7 @@ const rooms = {
       10: "wood-door-right",
       136: "iron-door-left",
       137: "iron-door-middle",
-      138: "iron-door-right",
+      138: "iron-door-right"
     }
   },
 
@@ -44,12 +44,12 @@ const rooms = {
       57: "tiles/beds/Gbed-B2.png",
 
       28: "tiles/objects/Ldesk.png",
-      29: "tiles/objects/Rdesk.png"
+      29: "tiles/objects/Rdesk.png",
+      127: "tiles/objects/floor_mop_tile.png"
     },
-
     interactables: {
-    28: "desk",
-    29: "desk"
+      28: "desk",
+      29: "desk"
     }
   }
 };
@@ -73,15 +73,18 @@ const keyDirections = {
 };
 
 const blockedTiles = [];
-const messages = {
-  desk: "The desk is covered in old papers. One of them is stained with something dark."
-};
+
+const messages = {};
+
 const images = {
-  desk: "Overlay/computer-screen.png"
+  sDesk: "Overlay/computer-screen.png",
+  cDesk: "Overlay/computer-correct.png",
+  iDesk: "Overlay/computer-incorrect.png"
 };
 
 let interactables = {};
 let modalOpen = false;
+let deskSolved = false;
 
 let playerTile = 0;
 
@@ -173,6 +176,7 @@ function movePlayer(direction) {
 
   const newTileId = playerTile + moves[direction];
   const newTile = document.getElementById("t" + newTileId);
+
   if (blockedTiles.includes(newTileId)) {
     return;
   }
@@ -203,7 +207,6 @@ function getNearbyInteractable() {
 
 function openModal(text, image) {
   const modalImage = document.getElementById("modal-image");
-
   const modalText = document.getElementById("modal-text");
 
   if (modalText) {
@@ -219,12 +222,31 @@ function openModal(text, image) {
 
   document.getElementById("modal").classList.remove("hidden");
   modalOpen = true;
-    CompPuz();
 }
 
 function closeModal() {
   document.getElementById("modal").classList.add("hidden");
   modalOpen = false;
+}
+
+function openDesk() {
+  openModal("", deskSolved ? images.cDesk : images.sDesk);
+
+  if (!deskSolved) {
+    setTimeout(CompPuz, 100);
+  }
+}
+
+function CompPuz() {
+  const password = "opg";
+  const entry = (prompt("enter password: ") || "").replace(/\s/g, "").toLowerCase();
+
+  if (entry === password) {
+    deskSolved = true;
+    document.getElementById("modal-image").src = images.cDesk;
+  } else {
+    document.getElementById("modal-image").src = images.iDesk;
+  }
 }
 
 document.addEventListener("keydown", function (event) {
@@ -238,7 +260,9 @@ document.addEventListener("keydown", function (event) {
   if (event.key === "e") {
     const name = getNearbyInteractable();
 
-    if (name) {
+    if (name === "desk") {
+      openDesk();
+    } else if (name) {
       openModal(messages[name], images[name]);
     }
     return;
@@ -256,17 +280,6 @@ const modalClose = document.getElementById("modal-close");
 
 if (modalClose) {
   modalClose.addEventListener("click", closeModal);
-}
-
-function CompPuz() {
-  const password = 'opg'
-  let entry = prompt("enter password: ").replace(/\s/g, "").toLowerCase()
-  if (entry == password){
-    alert("correct")
-  }else{
-    alert("incorrect")
-  }
-
 }
 
 createTiles();
