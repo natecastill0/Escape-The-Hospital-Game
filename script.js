@@ -19,7 +19,8 @@ const rooms = {
     doorTiles: {
       64: "floor",
       80: "floor",
-      96: "floor"
+      96: "floor",
+      85: "floorBlood"
     },
     objects: {
       18: "tiles/beds/Obed-T1.png",
@@ -163,12 +164,33 @@ function canMove(tileId, direction) {
 }
 
 function movePlayer(direction) {
-  player.classList.remove("facing-left", "facing-right");
-
   if (direction === "left") {
-    player.classList.add("facing-left");
+    player.classList.remove(
+      "facing-right",
+      "facing-mop-right"
+    );
+
+    if (equiped) {
+      player.classList.add("facing-mop-left");
+      player.classList.remove("facing-left");
+    } else {
+      player.classList.add("facing-left");
+      player.classList.remove("facing-mop-left");
+    }
+
   } else if (direction === "right") {
-    player.classList.add("facing-right");
+    player.classList.remove(
+      "facing-left",
+      "facing-mop-left"
+    );
+
+    if (equiped) {
+      player.classList.add("facing-mop-right");
+      player.classList.remove("facing-right");
+    } else {
+      player.classList.add("facing-right");
+      player.classList.remove("facing-mop-right");
+    }
   }
 
   if (!canMove(playerTile, direction)) {
@@ -182,9 +204,13 @@ function movePlayer(direction) {
     return;
   }
 
-  if (!newTile.classList.contains("floor")) {
-    return;
-  }
+if (
+  !newTile ||
+  (!newTile.classList.contains("floor") &&
+   !newTile.classList.contains("floorBlood"))
+) {
+  return;
+}
 
   newTile.appendChild(player);
   playerTile = newTileId;
@@ -260,25 +286,24 @@ document.addEventListener("keydown", function (event) {
     if (event.key === "e" || event.key === "Escape") {
       closeModal();
     }
+
     return;
   }
 
   if (event.key === "e") {
     const name = getNearbyInteractable();
 
-
     if (name === "desk") {
       openDesk();
-    } else if (name === "mop"){
-      if (equiped == false){
-        alert ("you are holding a mop now")
+    } else if (name === "mop") {
+      if (!equiped) {
+        alert("You are holding a mop now");
         equiped = true;
-      }else if (equiped == true){
-        alert ("you put the mop back")
+      } else {
+        alert("You put the mop back");
         equiped = false;
       }
     }
-
 
     return;
   }
