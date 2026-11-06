@@ -1,327 +1,169 @@
-const columns = 16;
-const rows = 9;
 
-const rooms = {
-  room1: {
-    playerStart: 72,
-    doorTiles: {
-      8: "wood-door-left",
-      9: "wood-door-middle",
-      10: "wood-door-right",
-      136: "iron-door-left",
-      137: "iron-door-middle",
-      138: "iron-door-right"
-    }
-  },
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  room3: {
-    playerStart: 79,
-    doorTiles: {
-      64: "floor",
-      80: "floor",
-      96: "floor",
-      85: "floorBlood"
-    },
-    objects: {
-      18: "tiles/beds/Obed-T1.png",
-      19: "tiles/beds/Obed-T2.png",
-      34: "tiles/beds/Obed-M1.png",
-      35: "tiles/beds/Obed-M2.png",
-      50: "tiles/beds/Obed-B1.png",
-      51: "tiles/beds/Obed-B2.png",
-
-      21: "tiles/beds/Pbed-T1.png",
-      22: "tiles/beds/Pbed-T2.png",
-      37: "tiles/beds/Pbed-M1.png",
-      38: "tiles/beds/Pbed-M2.png",
-      53: "tiles/beds/Pbed-B1.png",
-      54: "tiles/beds/Pbed-B2.png",
-
-      24: "tiles/beds/Gbed-T1.png",
-      25: "tiles/beds/Gbed-T2.png",
-      40: "tiles/beds/Gbed-M1.png",
-      41: "tiles/beds/Gbed-M2.png",
-      56: "tiles/beds/Gbed-B1.png",
-      57: "tiles/beds/Gbed-B2.png",
-
-      28: "tiles/objects/Ldesk.png",
-      29: "tiles/objects/Rdesk.png",
-      127: "tiles/objects/floor_mop_tile.png"
-    },
-    interactables: {
-      28: "desk",
-      29: "desk",
-      127: "mop"
-    }
-  }
-};
-
-const moves = {
-  up: -columns,
-  down: columns,
-  left: -1,
-  right: 1
-};
-
-const keyDirections = {
-  ArrowUp: "up",
-  ArrowDown: "down",
-  ArrowLeft: "left",
-  ArrowRight: "right",
-  w: "up",
-  s: "down",
-  a: "left",
-  d: "right"
-};
-
-const messages = {};
-
-const images = {
-  sDesk: "Overlay/computer-screen.png",
-  cDesk: "Overlay/computer-correct.png",
-  iDesk: "Overlay/computer-incorrect.png"
-};
-
-let interactables = {};
-let blockedTiles = [];
-let modalOpen = false;
-let deskSolved = false;
-let playerTile = 0;
-
-const player = document.createElement("div");
-player.id = "player";
-
-
-function createTiles() {
-  const room = document.getElementById("room");
-  const roomLayout = rooms[room.dataset.room];
-
-  if (!roomLayout) {
-    console.error("No layout found for room: " + room.dataset.room);
-    return;
-  }
-
-  const totalTiles = columns * rows;
-
-  for (let id = 1; id <= totalTiles; id++) {
-    const tile = document.createElement("div");
-    tile.id = "t" + id;
-    tile.classList.add("tile");
-
-    const row = Math.floor((id - 1) / columns);
-    const column = (id - 1) % columns;
-
-    const isBorder =
-      row === 0 ||
-      row === rows - 1 ||
-      column === 0 ||
-      column === columns - 1;
-
-    if (roomLayout.doorTiles[id]) {
-      tile.classList.add(roomLayout.doorTiles[id]);
-    } else if (isBorder) {
-      tile.classList.add("wall");
-    } else {
-      tile.classList.add("floor");
-    }
-
-    const objectImage = (roomLayout.objects || {})[id];
-
-    if (objectImage) {
-      tile.classList.add("object");
-      tile.style.setProperty("--object-image", 'url("' + objectImage + '")');
-
-      blockedTiles.push(id);
-    }
-
-    room.appendChild(tile);
-  }
-
-  playerTile = roomLayout.playerStart;
-  interactables = roomLayout.interactables || {};
-  document.getElementById("t" + playerTile).appendChild(player);
+body {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #222; 
 }
 
 
-function canMove(tileId, direction) {
-  if (direction === "left" && tileId % columns === 1) {
-    return false;
-  }
 
-  if (direction === "right" && tileId % columns === 0) {
-    return false;
-  }
-
-  if (direction === "up" && tileId <= columns) {
-    return false;
-  }
-
-  if (direction === "down" && tileId > columns * (rows - 1)) {
-    return false;
-  }
-
-  return true;
+#start-screen {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  text-align: center;
 }
 
-function movePlayer(direction) {
-  if (direction === "left") {
-    player.classList.remove(
-      "facing-right",
-      "facing-mop-right"
-    );
-
-    if (equiped) {
-      player.classList.add("facing-mop-left");
-      player.classList.remove("facing-left");
-    } else {
-      player.classList.add("facing-left");
-      player.classList.remove("facing-mop-left");
-    }
-
-  } else if (direction === "right") {
-    player.classList.remove(
-      "facing-left",
-      "facing-mop-left"
-    );
-
-    if (equiped) {
-      player.classList.add("facing-mop-right");
-      player.classList.remove("facing-right");
-    } else {
-      player.classList.add("facing-right");
-      player.classList.remove("facing-mop-right");
-    }
-  }
-
-  if (!canMove(playerTile, direction)) {
-    return;
-  }
-
-  const newTileId = playerTile + moves[direction];
-  const newTile = document.getElementById("t" + newTileId);
-
-  if (blockedTiles.includes(newTileId)) {
-    return;
-  }
-
-if (
-  !newTile ||
-  (!newTile.classList.contains("floor") &&
-   !newTile.classList.contains("floorBlood"))
-) {
-  return;
+#start-screen h1 {
+  font-size: 4rem;
 }
 
-  newTile.appendChild(player);
-  playerTile = newTileId;
+#start-screen p {
+  font-size: 1.5rem;
+  margin: 2% 0 4% 0;
+}
+
+#start-button {
+  padding: 1.5% 4%;
+  font-size: 1.5rem;
+  color: white;
+  background-color: #8b0000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#start-button:hover {
+  background-color: #b00000;
+}
+
+#start-button:active {
+  background-color: #600000;
 }
 
 
-function getNearbyInteractable() {
-  for (const direction in moves) {
-    if (!canMove(playerTile, direction)) {
-      continue;
-    }
-
-    const neighborName = interactables[playerTile + moves[direction]];
-
-    if (neighborName) {
-      return neighborName;
-    }
-  }
-
-  return null;
+#room {
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  grid-template-rows: repeat(9, 1fr);
+  width: min(100vw, calc(100vh * 16 / 9));
+  aspect-ratio: 16 / 9;
 }
 
-
-function openModal(text, image) {
-  const modalImage = document.getElementById("modal-image");
-  const modalText = document.getElementById("modal-text");
-
-  if (modalText) {
-    modalText.textContent = text || "";
-  }
-
-  if (image) {
-    modalImage.src = image;
-    modalImage.classList.remove("hidden");
-  } else {
-    modalImage.classList.add("hidden");
-  }
-
-  document.getElementById("modal").classList.remove("hidden");
-  modalOpen = true;
+.tile {
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
 }
 
-function closeModal() {
-  document.getElementById("modal").classList.add("hidden");
-  modalOpen = false;
+.wall {
+  background-image: url("tiles/wall_tile.png");
 }
 
-
-function openDesk() {
-  openModal("", deskSolved ? images.cDesk : images.sDesk);
-
-  if (!deskSolved) {
-    setTimeout(CompPuz, 100);
-  }
+.floor {
+  background-image: url("tiles/floor_tile.png");
 }
 
-function CompPuz() {
-  const password = "opg";
-  const entry = (prompt("enter password: ") || "").replace(/\s/g, "").toLowerCase();
-
-  if (entry === password) {
-    deskSolved = true;
-    document.getElementById("modal-image").src = images.cDesk;
-  } else {
-    document.getElementById("modal-image").src = images.iDesk;
-  }
+.floorBlood{
+background-image: url("Tiles/floor_blood_tile.png") ;
 }
 
- let equiped = false;
-
-document.addEventListener("keydown", function (event) {
-  if (modalOpen) {
-    if (event.key === "e" || event.key === "Escape") {
-      closeModal();
-    }
-
-    return;
-  }
-
-  if (event.key === "e") {
-    const name = getNearbyInteractable();
-
-    if (name === "desk") {
-      openDesk();
-    } else if (name === "mop") {
-      if (!equiped) {
-        alert("You are holding a mop now");
-        equiped = true;
-      } else {
-        alert("You put the mop back");
-        equiped = false;
-      }
-    }
-
-    return;
-  }
-
-  const direction = keyDirections[event.key];
-
-  if (direction) {
-    event.preventDefault();
-    movePlayer(direction);
-  }
-});
-
-
-const modalClose = document.getElementById("modal-close");
-
-if (modalClose) {
-  modalClose.addEventListener("click", closeModal);
+.object {
+  background-image: var(--object-image), url("tiles/floor_tile.png");
+}
+.wood-door-left {
+  background-image: url("tiles/Doors/wood_door_left.png");
 }
 
+.wood-door-middle {
+  background-image: url("tiles/Doors/wood_door_mid.png");
+}
 
-createTiles();
+.wood-door-right {
+  background-image: url("tiles/Doors/wood_door_right.png");
+}
+
+.iron-door-left {
+  background-image: url("tiles/Doors/iron_door_left.png");
+}
+
+.iron-door-middle {
+  background-image: url("tiles/Doors/iron_door_mid.png");
+}
+
+.iron-door-right {
+  background-image: url("tiles/Doors/iron_door_right.png");
+}
+
+#player {
+  width: 100%;
+  height: 100%;
+  background-image: url("sprites/player.png");
+  background-size: 100% 100%;
+}
+
+#player.facing-left {
+  background-image: url("sprites/playerL.png");
+}
+
+#player.facing-right {
+  background-image: url("sprites/playerR.png");
+}
+
+#player.facing-mop-left {
+  background-image: url("sprites/playerL-mop.png");
+}
+
+#player.facing-mop-right {
+  background-image: url("sprites/playerR-mop.png");
+}
+
+#modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+#modal.hidden {
+  display: none;
+}
+
+#modal-box {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+#modal-image {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+#modal-text {
+  font-size: 1.3rem;
+  margin-bottom: 5%;
+}
+
+#modal-image.hidden {
+  display: none;
+}
