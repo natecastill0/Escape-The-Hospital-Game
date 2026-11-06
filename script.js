@@ -77,9 +77,9 @@ const keyDirections = {
 const messages = {};
 
 const images = {
-  sDesk: "Overlay/computer-screen.png",
-  cDesk: "Overlay/computer-correct.png",
-  iDesk: "Overlay/computer-incorrect.png"
+  sDesk: "overlay/computer-screen.png",
+  cDesk: "overlay/computer-correct.png",
+  iDesk: "overlay/computer-incorrect.png"
 };
 
 let interactables = {};
