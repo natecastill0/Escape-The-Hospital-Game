@@ -71,7 +71,7 @@ body {
 }
 
 .floorBlood {
-  background-image: url("tiles/floor_blood_tile.png");
+  background-image: url("tiles/blood_floor_tile.png");
 }
 
 .object {
