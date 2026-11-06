@@ -4,11 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Room 1 - St. Eric Hospital</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="shared.css">
 </head>
 <body>
   <div id="room" data-room="room1"></div>
 
-  <script src="script.js"></script>
+  <div id="modal" class="hidden">
+    <div id="modal-box">
+      <p id="modal-text"></p>
+      <img id="modal-image" class="hidden" alt="">
+      <button id="modal-close">Close</button>
+    </div>
+  </div>
+
+  <script src="engine.js"></script>
+  <script src="room1.js"></script>
 </body>
 </html>
