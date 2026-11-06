@@ -74,6 +74,10 @@ body {
   background-image: url("tiles/floor_tile.png");
 }
 
+.floorBlood{
+background-image: url("Tiles/floor_blood_tile.png") ;
+}
+
 .object {
   background-image: var(--object-image), url("tiles/floor_tile.png");
 }
@@ -114,6 +118,14 @@ body {
 
 #player.facing-right {
   background-image: url("sprites/playerR.png");
+}
+
+#player.facing-mop-left {
+  background-image: url("sprites/playerL-mop.png");
+}
+
+#player.facing-mop-right {
+  background-image: url("sprites/playerR-mop.png");
 }
 
 #modal {
