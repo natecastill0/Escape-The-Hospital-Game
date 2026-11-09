@@ -1,3 +1,4 @@
+//Nathan Acosta JS
 const solvedFuseBoxes = {};
 
 function showFusePuzzle(fuseName) {
