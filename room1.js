@@ -131,7 +131,7 @@ function showFusePuzzle(fuseName) {
     rightArea.appendChild(makeWire(color, "right"));
   });
 }
-//diddy
+//diddy loves mark
 rooms.room1 = {
   playerStart: 72,
 
