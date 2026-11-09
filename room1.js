@@ -1,5 +1,3 @@
-//diddys java
-// Tracks which fuse boxes have been solved
 const solvedFuseBoxes = {};
 
 function showFusePuzzle(fuseName) {
