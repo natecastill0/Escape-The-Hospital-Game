@@ -151,7 +151,6 @@ rooms.room1 = {
     102: "wall",
     118: "wall"
   },
-
   objects: {
     18: "tiles/objects/fuse_box.png",
     87: "tiles/objects/fuse_box.png",
