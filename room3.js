@@ -1,3 +1,4 @@
+//Nates JS
 const room3Images = {
   desk: "overlay/computer-screen.png",
   deskCorrect: "overlay/computer-correct.png",
