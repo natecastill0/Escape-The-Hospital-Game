@@ -153,7 +153,15 @@ rooms.room1 = {
   objects: {
     18: "tiles/objects/fuse_box.png",
     87: "tiles/objects/fuse_box.png",
-    95: "tiles/objects/fuse_box.png"
+    95: "tiles/objects/fuse_box.png",
+    117:"tiles/blood_floor_tile.png",
+   98: "tiles/blood_floor_tile.png",
+   90: "tiles/blood_floor_tile.png",
+   36: "tiles/blood_floor_tile.png",
+   30: "tiles/blood_floor_tile.png",
+   25: "tiles/blood_floor_tile.png",
+   46: "tiles/blood_floor_tile.png",
+
   },
 
   interactables: {
