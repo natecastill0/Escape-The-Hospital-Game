@@ -85,10 +85,6 @@ function room3ToggleMop() {
   }
 }
 
-document.addEventListener("keydown", function (event) {
-  console.log(event.code);
-});
-
 function mopFloor(){
   if (heldItem == "mop"){
     rooms.room3.doorTiles[pos] = "floorBlood";

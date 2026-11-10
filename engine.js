@@ -218,6 +218,12 @@ document.addEventListener("keydown", function (event) {
     return;
   }
 
+  if (event.code === "Space") {
+    event.preventDefault();
+    mopFloor();
+    return;
+  }
+
   const direction = keyDirections[key];
 
   if (direction) {
@@ -225,7 +231,6 @@ document.addEventListener("keydown", function (event) {
     movePlayer(direction);
   }
 });
-
 const modalClose = document.getElementById("modal-close");
 
 if (modalClose) {
