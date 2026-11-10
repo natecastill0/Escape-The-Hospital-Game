@@ -1,3 +1,4 @@
+
 const columns = 16;
 const rows = 9;
 
@@ -10,6 +11,11 @@ const moves = {
   right: 1
 };
 
+function getCurrentRoom() {
+  const fileName = window.location.pathname.split("/").pop();
+  return fileName.replace(/\.html$/i, "");
+}
+
 const intPositions = {
   room1: 76,
   room2: 18,
@@ -17,8 +23,12 @@ const intPositions = {
   room4: 100
 };
 
-const intPos = intPositions[getCurrentRoom()];
+const currentRoom = getCurrentRoom();
+const intPos = intPositions[currentRoom];
 let pos = intPos;
+
+console.log("Current room:", currentRoom);
+console.log("Starting position:", pos);
 
 const keyDirections = {
   arrowup: "up",
@@ -233,7 +243,6 @@ document.addEventListener("keydown", function (event) {
   }
 
   if (event.code === "Space") {
-    console.log("space bar pressed");
     event.preventDefault();
     mopFloor();
     return;
@@ -246,6 +255,7 @@ document.addEventListener("keydown", function (event) {
     movePlayer(direction);
   }
 });
+
 const modalClose = document.getElementById("modal-close");
 
 if (modalClose) {
