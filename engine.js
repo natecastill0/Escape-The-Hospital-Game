@@ -1,6 +1,5 @@
 const columns = 16;
 const rows = 9;
-const pos = 9;
 
 const rooms = {};
 
@@ -10,6 +9,16 @@ const moves = {
   left: -1,
   right: 1
 };
+
+const intPositions = {
+  room1: 76,
+  room2: 18,
+  room3: 50,
+  room4: 100
+};
+
+const intPos = intPositions[getCurrentRoom()];
+let pos = intPos;
 
 const keyDirections = {
   arrowup: "up",
@@ -34,6 +43,10 @@ let modalOpen = false;
 let heldItem = null;
 let facing = null;
 let playerTile = 0;
+
+function updatePos(direction) {
+  pos += moves[direction];
+}
 
 function createTiles() {
   const room = document.getElementById("room");
