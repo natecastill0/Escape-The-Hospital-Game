@@ -89,8 +89,16 @@ function room3ToggleMop() {
   }
 }
 
+document.addEventListener("keydown", function (event) {
+  if (event.code === "Space") {
+    mopFloor();
+  }
+});
+
 function mopFloor(){
   if (heldItem == "mop"){
-    
+    rooms.room3.doorTiles[pos] = "floorBlood";
+  }else{
+    null;
   }
 }

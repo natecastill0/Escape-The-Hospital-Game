@@ -1,5 +1,6 @@
 const columns = 16;
 const rows = 9;
+const pos = 9;
 
 const rooms = {};
 
