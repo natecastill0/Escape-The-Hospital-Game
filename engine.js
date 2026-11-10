@@ -11,25 +11,6 @@ const moves = {
   right: 1
 };
 
-function getCurrentRoom() {
-  const fileName = window.location.pathname.split("/").pop();
-  return fileName.replace(/\.html$/i, "");
-}
-
-const intPositions = {
-  room1: 76,
-  room2: 18,
-  room3: 50,
-  room4: 100
-};
-
-const currentRoom = getCurrentRoom();
-const intPos = intPositions[currentRoom];
-let pos = intPos;
-
-console.log("Current room:", currentRoom);
-console.log("Starting position:", pos);
-
 const keyDirections = {
   arrowup: "up",
   arrowdown: "down",
@@ -53,10 +34,6 @@ let modalOpen = false;
 let heldItem = null;
 let facing = null;
 let playerTile = 0;
-
-function updatePos(direction) {
-  pos += moves[direction];
-}
 
 function createTiles() {
   const room = document.getElementById("room");
@@ -174,7 +151,6 @@ function movePlayer(direction) {
 
   newTile.appendChild(player);
   playerTile = newTileId;
-  updatePos(direction);
 }
 
 function getNearbyInteractable() {
