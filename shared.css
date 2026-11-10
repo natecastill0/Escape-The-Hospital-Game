@@ -18,9 +18,18 @@ body {
   width: 100%;
   display: flex;
 }
+.specialFit {
+  height: auto;
+  width: 100%;
+}
+.blockBox {
+  height: 100%;
+  width: 25%;
+  display: block;
+}
 .box {
   height: 100%;
-  width: 25%;;
+  width: 25%;
 }
 .center-content {
   align-items: center;
