@@ -1,3 +1,4 @@
+//mark gutierrez js
 rooms.room4 = {
   playerStart: 66,
   doorTiles: {
@@ -15,13 +16,16 @@ rooms.room4 = {
     if (name === "vaccine_cabinet") {
       room4OpenVaccineMinigame();
     }
-  },
-  onModalClose: function () {
-    document.getElementById("vaccineMinigame").classList.add("hidden");
   }
 };
 
 function room4OpenVaccineMinigame() {
-  openModal("");
-  document.getElementById("vaccineMinigame").classList.remove("hidden");
+  document.getElementById("vaccineModal").style.display = "flex";
+}
+function room4CloseVaccineMinigame() {
+  document.getElementById("vaccineModal").style.display = "none";
+}
+
+function nextModal() {
+  
 }
