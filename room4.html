@@ -10,16 +10,42 @@
 <body>
   <div id="room" data-room="room4"></div>
 
-  <div id="modal" class="hidden">
-    <div id="modal-box">
-      <p id="modal-text"></p>
-      <img id="modal-image" class="hidden" alt="">
-      <div id="vaccineMinigame" class="hidden">
-        <h1>Vaccine Minigame</h1>
+  <div id="vaccineModal" class="modal center-content">
+      <span class="close" onclick="room4CloseVaccineMinigame()">&times;</span>
+      <div class="nextBox clicky" onclick="nextModal()"></div>
+
+      <div class="modal-body center-content">
+        <div class="row center-content">
+        <div class="box center-content">
+          <img class="imgFit clicky" src="overlay/redVaccine.png" onclick=""/>
+        </div>
+        <div class="box center-content"></div>
+        <div class="box center-content">
+          <img class="imgFit clicky" src="overlay/greenVaccine.png" onclick=""/>
+        </div>
+        <div class="box center-content"></div>
+        </div>
+        <div class="row center-content">
+          <div class="box center-content"></div>
+          <div class="box center-content">
+            <img class="imgFit clicky" src="overlay/blueVaccine.png" onclick=""/>
+          </div>
+          <div class="box center-content"></div>
+          <div class="box center-content">
+            <img class="imgFit clicky"src="overlay/orangeVaccine.png" onclick=""/>
+          </div>
+        </div>
       </div>
-      <button id="modal-close">Close</button>
     </div>
-  </div>
+
+    <div id = "pigpenModal" class="modal center-content">
+      <span class="close" onclick="">&times;</span>
+      <div class="nextBox clicky" onclick="nextModal()"></div>
+      <div class="modal-body center-content">
+        <div class="row"></div>
+        <div class="row"></div>
+      </div>
+    </div>
 
   <script src="engine.js"></script>
   <script src="room4.js"></script>

@@ -1,4 +1,3 @@
-//Nates JS
 const room3Images = {
   desk: "overlay/computer-screen.png",
   deskCorrect: "overlay/computer-correct.png",
@@ -13,10 +12,7 @@ rooms.room3 = {
     64: "floor",
     80: "floor",
     96: "floor",
-    85: "floorBlood",
-    100: "floorBlood",
-    102: "floorBlood",
-    117: "floorBlood"
+    85: "floorBlood"
   },
   objects: {
     18: "tiles/beds/Obed-T1.png",
