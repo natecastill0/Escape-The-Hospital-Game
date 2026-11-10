@@ -164,6 +164,7 @@ function movePlayer(direction) {
 
   newTile.appendChild(player);
   playerTile = newTileId;
+  updatePos(direction);
 }
 
 function getNearbyInteractable() {
