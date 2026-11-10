@@ -86,10 +86,7 @@ function room3ToggleMop() {
 }
 
 document.addEventListener("keydown", function (event) {
-  if (event.code === "Space") {
-    mopFloor();
-    console.log("space bar pressed")
-  }
+  console.log(event.code);
 });
 
 function mopFloor(){
