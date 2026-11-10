@@ -219,6 +219,7 @@ document.addEventListener("keydown", function (event) {
   }
 
   if (event.code === "Space") {
+    console.log("space bar pressed");
     event.preventDefault();
     mopFloor();
     return;
