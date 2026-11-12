@@ -1,7 +1,8 @@
 const room3Images = {
   desk: "overlay/computer-screen.png",
   deskCorrect: "overlay/computer-correct.png",
-  deskIncorrect: "overlay/computer-incorrect.png"
+  deskIncorrect: "overlay/computer-incorrect.png",
+  fridge: "overlay/fridge-postit.png"
 };
 
 let room3DeskSolved = false;
@@ -38,18 +39,25 @@ rooms.room3 = {
 
     28: "tiles/objects/Ldesk.png",
     29: "tiles/objects/Rdesk.png",
-    127: "tiles/objects/floor_mop_tile.png"
+    127: "tiles/objects/floor_mop_tile.png",
+
+    81: "tiles/objects/fridge.png"
   },
   interactables: {
     28: "desk",
     29: "desk",
+    81: "fridge",
     127: "mop"
+    
   },
   onInteract: function (name) {
     if (name === "desk") {
       room3OpenDesk();
     } else if (name === "mop") {
       room3ToggleMop();
+    } else if (name === "fridge"){
+      alert ("you oppend the fridge");
+      room3OpenFridge();
     }
   }
 };
@@ -101,4 +109,8 @@ function mopFloor() {
       rooms.room3.doorTiles[playerTile] = "floorBlood";
     }
   }
+}
+
+function room3OpenFridge(){
+  openModal(room3Images.fridge);
 }

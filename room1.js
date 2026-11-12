@@ -14,11 +14,39 @@ rooms.room1 = {
     70: "wall",
     86: "wall",
     102: "wall",
-    118: "wall"
+    118: "wall",
+    123: "wall",
+    107: "wall",
+    91: "wall",
+    79: "wall",
+    91: "wall",
+    91: "wall",
+    91: "wall",
+  
   },
   objects: {
     18: "tiles/objects/fuse_box.png",
     87: "tiles/objects/fuse_box.png",
-    95: "tiles/objects/fuse_box.png"
+    95: "tiles/objects/fuse_box.png",
+    117:"tiles/blood_floor_tile.png",
+   98: "tiles/blood_floor_tile.png",
+   90: "tiles/blood_floor_tile.png",
+   36: "tiles/blood_floor_tile.png",
+   30: "tiles/blood_floor_tile.png",
+   25: "tiles/blood_floor_tile.png",
+   46: "tiles/blood_floor_tile.png",
+
+  },
+
+  interactables: {
+    18: "fuse1",
+    87: "fuse2",
+    95: "fuse3"
+  },
+
+  onInteract: function(name) {
+    if (name.startsWith("fuse")) {
+      showFusePuzzle(name);
+    }
   }
 };
