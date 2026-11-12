@@ -2,7 +2,7 @@ const room3Images = {
   desk: "overlay/computer-screen.png",
   deskCorrect: "overlay/computer-correct.png",
   deskIncorrect: "overlay/computer-incorrect.png",
-  fridge: "overlay/fridge-postit-overlay.png"
+  fridge: "overlay/fridge-postit.png"
 };
 
 let room3DeskSolved = false;
