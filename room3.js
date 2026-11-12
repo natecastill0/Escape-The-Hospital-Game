@@ -13,7 +13,15 @@ rooms.room3 = {
     64: "floor",
     80: "floor",
     96: "floor",
-    85: "floorBlood"
+    119: "floorBlood",
+    106: "floorBlood",
+    110: "floorBlood",
+    72: "floorBlood",
+    59: "floorBlood",
+    47: "floorBlood",
+    85: "floorBlood",
+    67: "floorBlood",
+    39: "floorBlood"
   },
   objects: {
     18: "tiles/beds/Obed-T1.png",
@@ -111,6 +119,6 @@ function mopFloor() {
   }
 }
 
-function room3OpenFridge(){
-  openModal(room3Images.fridge);
+function room3OpenFridge() {
+  openModal("", room3Images.fridge);
 }
