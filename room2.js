@@ -13,8 +13,15 @@ rooms.room2 = {
     109: "tiles/objects/Brain.png",
     36: "tiles/objects/Head3.png",
     83: "tiles/objects/MetalPiece.png",
-    89: "tiles/objects/makebead-32x32 (2).png",
-    88: "tiles/objects/makebead-32x32 (3).png",
-    90: "tiles/objects/makebead-32x32 (4).png",
+    89: "tiles/objects/Buttom Leg Two.png",
+    88: "tiles/objects/Buttom Leg One.png",
+    72: "tiles/objects/Bed One.png",
+    73: "tiles/objects/Bed One.png",
+    71: "tiles/objects/Bed Back.png",
+    74: "tiles/objects/Bed Front.png",
+    67: "tiles/objects/Stick Thing Buttom One.png",
+    68: "tiles/objects/Stick Thing Buttom Two.png",
+    51: "tiles/objects/Blue Bag.png",
+    52: "tiles/objects/Blood Bag.png",
   }
 };
