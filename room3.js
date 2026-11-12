@@ -1,7 +1,8 @@
 const room3Images = {
   desk: "overlay/computer-screen.png",
   deskCorrect: "overlay/computer-correct.png",
-  deskIncorrect: "overlay/computer-incorrect.png"
+  deskIncorrect: "overlay/computer-incorrect.png",
+  fridge: "overlay/fridge-postit-overlay.png"
 };
 
 let room3DeskSolved = false;
@@ -56,6 +57,7 @@ rooms.room3 = {
       room3ToggleMop();
     } else if (name === "fridge"){
       alert ("you oppend the fridge");
+      room3OpenFridge();
     }
   }
 };
@@ -107,4 +109,8 @@ function mopFloor() {
       rooms.room3.doorTiles[playerTile] = "floorBlood";
     }
   }
+}
+
+function room3OpenFridge(){
+  openModal(room3Images.fridge);
 }
