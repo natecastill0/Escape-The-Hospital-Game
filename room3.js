@@ -38,18 +38,24 @@ rooms.room3 = {
 
     28: "tiles/objects/Ldesk.png",
     29: "tiles/objects/Rdesk.png",
-    127: "tiles/objects/floor_mop_tile.png"
+    127: "tiles/objects/floor_mop_tile.png",
+
+    81: "tiles/objects/fridge.png"
   },
   interactables: {
     28: "desk",
     29: "desk",
+    81: "fridge",
     127: "mop"
+    
   },
   onInteract: function (name) {
     if (name === "desk") {
       room3OpenDesk();
     } else if (name === "mop") {
       room3ToggleMop();
+    } else if (name === "fridge"){
+      alert ("you oppend the fridge");
     }
   }
 };
