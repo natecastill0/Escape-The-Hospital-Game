@@ -7,13 +7,14 @@ rooms.room2 = {
     136: "iron-door-left",
     137: "iron-door-middle",
     138: "iron-door-right",
-    35: "iron-door-right",
-    41: "iron-door-right",
-    61: "iron-door-right",
-    69: "iron-door-right",
-    106: "iron-door-right"
   },
+
   objects: {
-    109: "tiles/objects/Claw Arm.png"
+    109: "tiles/objects/Brain.png",
+    36: "tiles/objects/Head3.png",
+    83: "tiles/objects/MetalPiece.png",
+    89: "tiles/objects/makebead-32x32 (2).png",
+    88: "tiles/objects/makebead-32x32 (3).png",
+    90: "tiles/objects/makebead-32x32 (4).png",
   }
 };

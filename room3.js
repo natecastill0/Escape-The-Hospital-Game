@@ -84,3 +84,21 @@ function room3ToggleMop() {
     setHeldItem(null);
   }
 }
+
+function mopFloor() {
+  if (heldItem === "mop") {
+    const currentTile = document.getElementById("t" + playerTile);
+
+    if (currentTile.classList.contains("floorBlood")) {
+      currentTile.classList.remove("floorBlood");
+      currentTile.classList.add("floor");
+
+      rooms.room3.doorTiles[playerTile] = "floor";
+    } else {
+      currentTile.classList.remove("floor");
+      currentTile.classList.add("floorBlood");
+
+      rooms.room3.doorTiles[playerTile] = "floorBlood";
+    }
+  }
+}
