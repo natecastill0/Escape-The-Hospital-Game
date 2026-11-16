@@ -27,5 +27,11 @@ rooms.room2 = {
     103: "tiles/objects/Medicine Cabin Two.png",
     59: "tiles/objects/Left.png",
     60: "tiles/objects/Right.png",
+    43: "tiles/objects/Top Part Moniter.png",
+    44: "tiles/objects/Top Left Moniter.png",
+    107: "tiles/objects/makebead-32x32 (10).png",
+    91: "tiles/objects/makebead-32x32 (12).png",
+    92: "tiles/objects/makebead-32x32 (13).png",
+    108: "tiles/objects/makebead-32x32 (11).png",
   }
 };
