@@ -19,9 +19,13 @@ rooms.room2 = {
     73: "tiles/objects/Bed One.png",
     71: "tiles/objects/Bed Back.png",
     74: "tiles/objects/Bed Front.png",
-    67: "tiles/objects/Stick Thing Buttom One.png",
-    68: "tiles/objects/Stick Thing Buttom Two.png",
-    51: "tiles/objects/Blue Bag.png",
-    52: "tiles/objects/Blood Bag.png",
+    69: "tiles/objects/Stick Thing Buttom One.png",
+    70: "tiles/objects/Stick Thing Buttom Two.png",
+    53: "tiles/objects/Blue Bag.png",
+    54: "tiles/objects/Blood Bag.png",
+    102: "tiles/objects/Medicine Cabin One.png",
+    103: "tiles/objects/Medicine Cabin Two.png",
+    59: "tiles/objects/Left.png",
+    60: "tiles/objects/Right.png",
   }
 };
