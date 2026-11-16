@@ -14,18 +14,36 @@ rooms.room4 = {
   },
   onInteract: function (name) {
     if (name === "vaccine_cabinet") {
-      room4OpenVaccineMinigame();
+      document.getElementById("vaccineModal").classList.remove("hidden");
     }
   }
 };
 
-function room4OpenVaccineMinigame() {
-  document.getElementById("vaccineModal").style.display = "flex";
-}
-function room4CloseVaccineMinigame() {
-  document.getElementById("vaccineModal").style.display = "none";
+let vaccineModal = true;
+
+function closeModal() {
+  if (vaccineModal == true) {
+    document.getElementById("vaccineModal").classList.add("hidden");
+  } else {
+    document.getElementById("pigpenModal").classList.add("hidden");
+  }
 }
 
 function nextModal() {
-  
+  if (vaccineModal == true) {
+    vaccineModal = false;
+    document.getElementById("vaccineModal").classList.add("hidden");
+    document.getElementById("pigpenModal").classList.remove("hidden");
+  } else if (vaccineModal == false) {
+    vaccineModal = true;
+    document.getElementById("pigpenModal").classList.add("hidden");
+    document.getElementById("vaccineModal").classList.remove("hidden"); 
+  }
+}
+
+function pickUpVaccine(vaccine) {
+  closeModal();
+  document.getElementById("itemDiv").classList.remove("hidden");
+  let temp = vaccine.getAttribute("src");
+  document.getElementById("itemSlot").setAttribute("src", temp);
 }

@@ -10,70 +10,42 @@
 <body>
   <div id="room" data-room="room4"></div>
 
-<<<<<<< HEAD
-  <div id="modal" class="hidden">
-    <div id="modal-box">
-      <p id="modal-text"></p>
-      <img id="modal-image" class="hidden" alt="">
-      <div id="vaccineMinigame" class="hidden">
-        <h1>Vaccine Minigame</h1>
-      </div>
-      <button id="modal-close">Close</button>
-    </div>
+  <div id="itemDiv" style = "width: 7.5%; height: 15%; position: absolute; top: 84%; right: 45%; outline: 6px solid #030303;" class="center-content hidden">
+    <img id="itemSlot" style="height: 100%; width: auto;"src=""/>
   </div>
 
-=======
-  <div id="vaccineModal" class="modal center-content">
-      <span class="close" onclick="room4CloseVaccineMinigame()">&times;</span>
+<div id="vaccineModal" class="modal center-content hidden">
+      <span class="close" onclick="closeModal()">&times;</span>
       <div class="nextBox clicky" onclick="nextModal()"></div>
 
       <div class="modal-body center-content">
         <div class="row center-content">
-        <div class="box center-content">
-          <img class="imgFit clicky" src="overlay/redVaccine.png" onclick=""/>
-        </div>
-        <div class="blockBox center-content">
-          <img class="specialFit" src="overlay/expire pigpen.png"/>
-          <img class="specialFit" src="overlay/left arrow.png"/>
-        </div>
-        <div class="box center-content">
-          <img class="imgFit clicky" src="overlay/greenVaccine.png" onclick=""/>
-        </div>
-        <div class="blockBox center-content">
-          <img class="specialFit" src="overlay/grave pigpen.png"/>
-          <img class="specialFit" src="overlay/left arrow.png"/>
-        </div>
+        <img class="clicky" style="position: absolute; top: 10px; right: 100px; height: 50%; width: auto;" src="overlay/redVaccine.png" onclick="pickUpVaccine(this)"/>
+        <img style="position: absolute; top: 350px; right: 0px; height: auto; width: 30%;" src="overlay/grave pigpen.png"/>
+ 
+        <img class="clicky" style="position: absolute; top: 10px; right: 750px; height: 50%; width: auto;" src="overlay/greenVaccine.png" onclick="pickUpVaccine(this)"/>
+        <img style="position: absolute; top: 350px; right: 620px; height: auto; width: 30%;" src="overlay/expire pigpen.png"/>
         </div>
         <div class="row center-content">
-          <div class="box center-content"></div>
-          <div class="box center-content">
-            <img class="imgFit clicky" src="overlay/blueVaccine.png" onclick=""/>
-          </div>
-          <div class="blockBox center-content">
-            <img class="specialFit" src="overlay/survive pigpen.png"/>
-            <img class="specialFit" src="overlay/left arrow.png"/>
-          </div>
-          <div class="box center-content">
-            <img class="imgFit clicky"src="overlay/orangeVaccine.png" onclick=""/>
-          </div>
-          <div class="blockBox center-content">
-            <img class="specialFit" src="overlay/death pigpen.png"/>
-            <img class="specialFit" src="overlay/left arrow.png"/>
-          </div>
+          <img class="clicky" style="position: absolute; top: 220px; right: 1100px; height: 50%; width: auto;" src="overlay/blueVaccine.png" onclick="pickUpVaccine(this)"/>
+          <img style="position: absolute; top: 560px; right: 940px; height: auto; width: 30%;" src="overlay/survive pigpen.png"/>
+        
+          <img class="clicky" style="position: absolute; top: 220px; right: 400px; height: 50%; width: auto;" src="overlay/orangeVaccine.png" onclick="pickUpVaccine(this)"/>
+          <img style="position: absolute; top: 560px; right: 250px; height: auto; width: 30%;" src="overlay/death pigpen.png"/>
+
         </div>
       </div>
     </div>
-    <!--
-    <div id = "pigpenModal" class="modal center-content">
-      <span class="close" onclick="">&times;</span>
+    
+    <div id = "pigpenModal" class="modal center-content hidden">
+      <span class="close" onclick="closeModal()">&times;</span>
       <div class="nextBox clicky" onclick="nextModal()"></div>
       <div class="modal-body center-content">
-        <div class="row"></div>
-        <div class="row"></div>
+        <img style="position: absolute; top: 10%; right: 7%;" src="overlay/pigpenkey.webp"/>
       </div>
     </div>
-  -->
->>>>>>> b8cf7a07667c03d71edf212b498d2b0dcdaec7d7
+  
+
   <script src="engine.js"></script>
   <script src="room4.js"></script>
 </body>
