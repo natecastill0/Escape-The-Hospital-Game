@@ -127,18 +127,18 @@ function showFusePuzzle(fuseName) {
 rooms.room1 = {
   playerStart: 72,
   doorTiles: {
-    8: "wood-door-left",
-    9: "wood-door-middle",
+    8: "wood-door-l3eft",
+    9: "wood-door-mid3dle",
     10: "wood-door-right",
     136: "iron-door-left",
     137: "iron-door-middle",
     138: "iron-door-right",
     66: "wall",
     67: "iron-door-left",
-    68: "iron-door-middle",
+    68: "iron-door3-middle",
     69: "iron-door-right",
     70: "wall",
-    86: "wall",
+    86: "w3all",
     102: "wall",
     118: "wall",
     123: "wall",
@@ -174,13 +174,5 @@ rooms.room1 = {
     if (name.startsWith("fuse")) {
       showFusePuzzle(name);
     }
-  }
-};
-
-onInteract: function (name) {
-  if (name === "desk") {
-    room3OpenDesk();
-  } else if (name === "mop") {
-    room3ToggleMop();
   }
 };
