@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +14,42 @@
     <div id="modal-box">
       <p id="modal-text"></p>
       <img id="modal-image" class="hidden" alt="">
+
+      <!-- Fuse Box Puzzle -->
+      <div id="wire-puzzle" class="hidden">
+
+        <div class="wire-board">
+          <img
+            src="tiles/objects/fuse_box_puzzle.png"
+            alt="Open fuse box"
+            class="wire-image"
+          >
+
+          <button class="wire-button wire-left wire-red"
+            data-color="red"></button>
+
+          <button class="wire-button wire-left wire-yellow"
+            data-color="yellow"></button>
+
+          <button class="wire-button wire-left wire-blue"
+            data-color="blue"></button>
+
+          <button class="wire-button wire-right wire-blue"
+            data-color="blue"></button>
+
+          <button class="wire-button wire-right wire-red"
+            data-color="red"></button>
+
+          <button class="wire-button wire-right wire-yellow"
+            data-color="yellow"></button>
+        </div>
+
+        <p id="wire-message">
+          Select a wire on the left, then its match on the right.
+        </p>
+
+      </div>
+
       <button id="modal-close">Close</button>
     </div>
   </div>
