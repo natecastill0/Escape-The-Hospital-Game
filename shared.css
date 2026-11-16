@@ -13,6 +13,10 @@ body {
   background-color: #222;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .row {
   height: 50%;
   width: 100%;
@@ -45,7 +49,11 @@ body {
   width: 12%;
   position: fixed;
   left: 85%;
-  background-color: aqua;
+  background-image: url("overlay/right arrow.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
 }
 .modal {
   display: flex;

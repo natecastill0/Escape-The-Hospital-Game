@@ -15,6 +15,7 @@ rooms.room4 = {
   onInteract: function (name) {
     if (name === "vaccine_cabinet") {
       document.getElementById("vaccineModal").classList.remove("hidden");
+      document.getElementById("itemDiv").classList.add("hidden");
     }
   }
 };
@@ -22,6 +23,7 @@ rooms.room4 = {
 let vaccineModal = true;
 
 function closeModal() {
+  document.getElementById("itemDiv").classList.remove("hidden");
   if (vaccineModal == true) {
     document.getElementById("vaccineModal").classList.add("hidden");
   } else {
@@ -43,6 +45,8 @@ function nextModal() {
 
 function pickUpVaccine(vaccine) {
   closeModal();
+  document.getElementById("equipSound").currentTime = 0;
+  document.getElementById("equipSound").play();
   document.getElementById("itemDiv").classList.remove("hidden");
   let temp = vaccine.getAttribute("src");
   document.getElementById("itemSlot").setAttribute("src", temp);
