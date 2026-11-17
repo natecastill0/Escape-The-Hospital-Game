@@ -1,3 +1,7 @@
+const room1Images = {
+  fuseBox: "tiles/objects/fuse_box_puzzle.png"
+};
+
 rooms.room1 = {
   playerStart: 72,
   doorTiles: {
@@ -41,5 +45,10 @@ let toggle = 0
 
 function room1FuseBox(){
 toggle++
+room1OpenFuseBox();
 alert ("you turend on the fuse box, turn on "+(3-toggle)+" more.");
+}
+
+function room1OpenFuseBox() {
+  openModal("", room1Images.fuseBox);
 }
