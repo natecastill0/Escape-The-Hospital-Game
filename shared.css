@@ -160,6 +160,10 @@ body {
   background-image: url("tiles/wall_tile.png");
 }
 
+.fuse-box {
+  background-image: url("tiles/objects/fuse_box.png");
+}
+
 .floor {
   background-image: url("tiles/floor_tile.png");
 }
