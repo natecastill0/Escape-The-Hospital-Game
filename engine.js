@@ -219,7 +219,9 @@ document.addEventListener("keydown", function (event) {
 
   if (event.code === "Space") {
     event.preventDefault();
-    mopFloor();
+      if (currentLayout && currentLayout.onAction) {
+        currentLayout.onAction();
+      }
     return;
   }
 

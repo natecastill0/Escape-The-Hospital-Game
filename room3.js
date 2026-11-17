@@ -69,7 +69,8 @@ rooms.room3 = {
     } else if (name === "fridge"){
       room3OpenFridge();
     }
-  }
+  },
+    onAction: mopFloor
 };
 
 function sleep(ms) {
@@ -130,16 +131,7 @@ function mopFloor() {
 }
 
 function room3OpenFridge() {
-  const clean = false;
-  const modalImage = document.getElementById("modal-image");
-  if(//there are no blood floor tiles){
-  clean == true;  
-  }else{
-  clean == false;
-  }
-  if (clean==true) {
-    modalImage.src = room3Images.fridgeOpen;
-  } else {
-    modalImage.src = room3Images.fridgePost;
-  }
+  const noBloodLeft = document.querySelector(".floorBlood") === null;
+
+  openModal("", noBloodLeft ? room3Images.fridgeOpen : room3Images.fridgePost);
 }
