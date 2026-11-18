@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -13,40 +14,55 @@ body {
   background-color: #222;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .row {
   height: 50%;
   width: 100%;
   display: flex;
 }
+
 .specialFit {
   height: auto;
   width: 100%;
 }
+
 .blockBox {
   height: 100%;
   width: 25%;
   display: block;
 }
+
 .box {
   height: 100%;
   width: 25%;
 }
+
 .center-content {
   align-items: center;
   justify-content: center;
   display: flex;
 }
+
 .imgFit {
   height: 100%;
   width: auto;
 }
+
 .nextBox {
   height: 20%;
   width: 12%;
   position: fixed;
   left: 85%;
-  background-color: aqua;
+  background-image: url("overlay/right arrow.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
 }
+
 .modal {
   display: flex;
   position: fixed;
@@ -66,12 +82,15 @@ body {
   margin: 0;
   display: block;
 }
+
 .clicky:hover {
   cursor: pointer;
 }
+
 .clicky:active {
   transform: scale(0.95);
 }
+
 .close {
   color: #aaaaaa;
   position: fixed;
@@ -87,7 +106,6 @@ body {
   text-decoration: none;
   cursor: pointer;
 }
-
 
 #start-screen {
   width: 60%;
@@ -140,6 +158,10 @@ body {
 
 .wall {
   background-image: url("tiles/wall_tile.png");
+}
+
+.fuse-box {
+  background-image: url("tiles/objects/fuse_box.png");
 }
 
 .floor {
@@ -265,4 +287,83 @@ body {
 
 .clicky:active {
   transform: scale(0.95);
+}
+
+
+/* =================================
+   FUSE BOX PUZZLE
+================================= */
+
+#wire-puzzle {
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 15px;
+}
+
+#wire-puzzle.hidden {
+  display: none;
+}
+
+.wire-board {
+  position: relative;
+  width: 100%;
+}
+
+.wire-image {
+  width: 100%;
+  display: block;
+}
+
+.wire-button {
+  position: absolute;
+  width: 18%;
+  height: 13%;
+  background: transparent;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.wire-button:hover {
+  border: 2px solid white;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Left wires */
+
+.wire-left.wire-red {
+  top: 24%;
+  left: 28%;
+}
+
+.wire-left.wire-yellow {
+  top: 42%;
+  left: 28%;
+}
+
+.wire-left.wire-blue {
+  top: 60%;
+  left: 28%;
+}
+
+/* Right wires */
+
+.wire-right.wire-blue {
+  top: 24%;
+  left: 69%;
+}
+
+.wire-right.wire-red {
+  top: 42%;
+  left: 69%;
+}
+
+.wire-right.wire-yellow {
+  top: 60%;
+  left: 69%;
+}
+
+#wire-message {
+  color: white;
+  font-size: 18px;
+  margin-top: 10px;
 }
