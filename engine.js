@@ -80,8 +80,30 @@ function createTiles() {
 
   currentLayout = roomLayout;
   interactables = roomLayout.interactables || {};
-  playerTile = roomLayout.playerStart;
+  playerTile = getStartTile(roomLayout, totalTiles);
   document.getElementById("t" + playerTile).appendChild(player);
+}
+
+function getStartTile(roomLayout, totalTiles) {
+  const requestedTile = Number(new URLSearchParams(window.location.search).get("start"));
+
+  if (requestedTile >= 1 && requestedTile <= totalTiles && isWalkable(requestedTile)) {
+    return requestedTile;
+  }
+
+  return roomLayout.playerStart;
+}
+
+function isWalkable(tileId) {
+  const tile = document.getElementById("t" + tileId);
+
+  if (!tile || blockedTiles.includes(tileId)) {
+    return false;
+  }
+
+  return walkableClasses.some(function (className) {
+    return tile.classList.contains(className);
+  });
 }
 
 function canMove(tileId, direction) {
@@ -105,12 +127,11 @@ function canMove(tileId, direction) {
 }
 
 function updatePlayerSprite() {
-  player.classList.remove(
-    "facing-left",
-    "facing-right",
-    "facing-mop-left",
-    "facing-mop-right"
-  );
+  Array.from(player.classList).forEach(function (className) {
+    if (className.startsWith("facing-")) {
+      player.classList.remove(className);
+    }
+  });
 
   if (facing) {
     const itemPart = heldItem ? heldItem + "-" : "";
@@ -123,6 +144,14 @@ function setHeldItem(itemName) {
   updatePlayerSprite();
 }
 
+function leaveRoomIfExit() {
+  const exit = (currentLayout.exits || {})[playerTile];
+
+  if (exit) {
+    window.location.href = exit.page + "?start=" + exit.start;
+  }
+}
+
 function movePlayer(direction) {
   if (direction === "left" || direction === "right") {
     facing = direction;
@@ -130,25 +159,17 @@ function movePlayer(direction) {
   }
 
   if (!canMove(playerTile, direction)) {
+    leaveRoomIfExit();
     return;
   }
 
   const newTileId = playerTile + moves[direction];
-  const newTile = document.getElementById("t" + newTileId);
 
-  if (!newTile || blockedTiles.includes(newTileId)) {
+  if (!isWalkable(newTileId)) {
     return;
   }
 
-  const isWalkable = walkableClasses.some(function (className) {
-    return newTile.classList.contains(className);
-  });
-
-  if (!isWalkable) {
-    return;
-  }
-
-  newTile.appendChild(player);
+  document.getElementById("t" + newTileId).appendChild(player);
   playerTile = newTileId;
 }
 
@@ -169,8 +190,14 @@ function getNearbyInteractable() {
 }
 
 function openModal(text, image) {
+  const modal = document.getElementById("modal");
   const modalImage = document.getElementById("modal-image");
   const modalText = document.getElementById("modal-text");
+
+  if (!modal) {
+    console.error("This page has no #modal element");
+    return;
+  }
 
   if (modalText) {
     modalText.textContent = text || "";
@@ -183,12 +210,17 @@ function openModal(text, image) {
     modalImage.classList.add("hidden");
   }
 
-  document.getElementById("modal").classList.remove("hidden");
+  modal.classList.remove("hidden");
   modalOpen = true;
 }
 
 function closeModal() {
-  document.getElementById("modal").classList.add("hidden");
+  const modal = document.getElementById("modal");
+
+  if (modal) {
+    modal.classList.add("hidden");
+  }
+
   modalOpen = false;
 
   if (currentLayout && currentLayout.onModalClose) {
@@ -197,6 +229,10 @@ function closeModal() {
 }
 
 document.addEventListener("keydown", function (event) {
+  if (!event.key || event.ctrlKey || event.metaKey || event.altKey || !currentLayout) {
+    return;
+  }
+
   const key = event.key.toLowerCase();
 
   if (modalOpen) {
@@ -210,7 +246,7 @@ document.addEventListener("keydown", function (event) {
   if (key === "e") {
     const name = getNearbyInteractable();
 
-    if (name && currentLayout && currentLayout.onInteract) {
+    if (name && currentLayout.onInteract) {
       currentLayout.onInteract(name);
     }
 
@@ -219,9 +255,11 @@ document.addEventListener("keydown", function (event) {
 
   if (event.code === "Space") {
     event.preventDefault();
-      if (currentLayout && currentLayout.onAction) {
-        currentLayout.onAction();
-      }
+
+    if (currentLayout.onAction) {
+      currentLayout.onAction();
+    }
+
     return;
   }
 

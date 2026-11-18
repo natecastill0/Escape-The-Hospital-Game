@@ -61,23 +61,31 @@ rooms.room3 = {
     29: "desk",
     81: "fridge",
     127: "mop"
-    
+  },
+  exits: {
+    64: { page: "room2.html", start: 66 },
+    80: { page: "room2.html", start: 66 },
+    96: { page: "room2.html", start: 66 }
   },
   onInteract: function (name) {
     if (name === "desk") {
       room3OpenDesk();
     } else if (name === "mop") {
       room3ToggleMop();
-    } else if (name === "fridge"){
+    } else if (name === "fridge") {
       room3OpenFridge();
     }
   },
-    onAction: mopFloor
+  onAction: mopFloor
 };
 
-alert("Welcome to room 3, important things to know: \n You need to unlock the computer to print out the missing part. \n pressing e or space might do something. \n W A S D to move \n check the fridge for a hint")
+window.addEventListener("load", function () {
+  setTimeout(function () {
+    alert("Welcome to room 3, important things to know: \n You need to unlock the computer to print out the missing part. \n pressing e or space might do something. \n W A S D to move \n check the fridge for a hint");
+  }, 100);
+});
 
-function sleep(ms) {
+function room3Sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
@@ -98,7 +106,7 @@ async function room3CheckPassword() {
     room3DeskSolved = true;
     modalImage.src = room3Images.compCorrect;
 
-    await sleep(500);
+    await room3Sleep(500);
 
     modalImage.src = room3Images.compPrint;
   } else {
