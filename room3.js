@@ -63,9 +63,9 @@ rooms.room3 = {
     127: "mop"
   },
   exits: {
-    64: { page: "room2.html", start: 66 },
-    80: { page: "room2.html", start: 66 },
-    96: { page: "room2.html", start: 66 }
+    64: { page: "room2.html", start: 65 },
+    80: { page: "room2.html", start: 65 },
+    96: { page: "room2.html", start: 65 }
   },
   onInteract: function (name) {
     if (name === "desk") {
