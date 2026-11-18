@@ -1,24 +1,20 @@
 rooms.room2 = {
-  playerStart: 72,
+  playerStart: 25,
   doorTiles: {
-    8: "wood-door-left",
-    9: "wood-door-middle",
-    10: "wood-door-right",
-    136: "iron-door-left",
-    137: "iron-door-middle",
-    138: "iron-door-right",
+    64: "wood-door-left",
+    80: "wood-door-middle",
+    96: "wood-door-right",
+    49: "iron-door-left",
+    65: "iron-door-middle",
+    81: "iron-door-right",
   },
 
   objects: {
     109: "tiles/objects/Brain.png",
     36: "tiles/objects/Head3.png",
     83: "tiles/objects/MetalPiece.png",
-    89: "tiles/objects/Buttom Leg Two.png",
-    88: "tiles/objects/Buttom Leg One.png",
-    72: "tiles/objects/Bed One.png",
-    73: "tiles/objects/Bed One.png",
-    71: "tiles/objects/Bed Back.png",
-    74: "tiles/objects/Bed Front.png",
+    72: "tiles/objects/makebead-32x32 (14).png",
+    73: "tiles/objects/makebead-32x32 (15).png",
     69: "tiles/objects/Stick Thing Buttom One.png",
     70: "tiles/objects/Stick Thing Buttom Two.png",
     53: "tiles/objects/Blue Bag.png",
@@ -35,3 +31,4 @@ rooms.room2 = {
     108: "tiles/objects/makebead-32x32 (11).png",
   }
 };
+
