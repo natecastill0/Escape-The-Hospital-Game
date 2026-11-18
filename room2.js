@@ -1,12 +1,12 @@
 rooms.room2 = {
   playerStart: 25,
   doorTiles: {
-    64: "wood-door-left",
-    80: "wood-door-middle",
-    96: "wood-door-right",
-    49: "iron-door-left",
-    65: "iron-door-middle",
-    81: "iron-door-right",
+    64: "floor",
+    80: "floor",
+    96: "floor",
+    49: "floor",
+    65: "floor",
+    81: "floor",
   },
 
   objects: {
