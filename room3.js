@@ -52,6 +52,8 @@ rooms.room3 = {
     29: "tiles/objects/Rdesk.png",
     127: "tiles/objects/floor_mop_tile.png",
 
+    31: "tiles/objects/3d-printer.png",
+
     81: "tiles/objects/fridge.png"
   },
   interactables: {
