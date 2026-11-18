@@ -1,14 +1,17 @@
 const room3Images = {
-  desk: "overlay/computer-screen.png",
-  deskCorrect: "overlay/computer-correct.png",
-  deskIncorrect: "overlay/computer-incorrect.png",
-  fridge: "overlay/fridge-postit.png"
+  computer: "overlay/computer-screen.png",
+  compCorrect: "overlay/computer-correct.png",
+  compIncorrect: "overlay/computer-incorrect.png",
+  compPrint: "overlay/computer-print.png",
+  fridgePost: "overlay/fridge-postit.png",
+  fridgeOpen: "overlay/fridge-open.png",
+  fridgeSrl: "overlay/fridge-scroll.png"
 };
 
 let room3DeskSolved = false;
 
 rooms.room3 = {
-  playerStart: 79,
+  playerStart: 80,
   doorTiles: {
     64: "floor",
     80: "floor",
@@ -49,6 +52,8 @@ rooms.room3 = {
     29: "tiles/objects/Rdesk.png",
     127: "tiles/objects/floor_mop_tile.png",
 
+    31: "tiles/objects/3d-printer.png",
+
     81: "tiles/objects/fridge.png"
   },
   interactables: {
@@ -56,44 +61,62 @@ rooms.room3 = {
     29: "desk",
     81: "fridge",
     127: "mop"
-    
+  },
+  exits: {
+    64: { page: "room2.html", start: 65 },
+    80: { page: "room2.html", start: 65 },
+    96: { page: "room2.html", start: 65 }
   },
   onInteract: function (name) {
     if (name === "desk") {
       room3OpenDesk();
     } else if (name === "mop") {
       room3ToggleMop();
-    } else if (name === "fridge"){
-      alert ("you oppend the fridge");
+    } else if (name === "fridge") {
       room3OpenFridge();
     }
-  }
+  },
+  onAction: mopFloor
 };
 
+window.addEventListener("load", function () {
+  setTimeout(function () {
+    alert("Welcome to room 3, important things to know: \n You need to unlock the computer to print out the missing part. \n pressing e or space might do something. \n W A S D to move \n check the fridge for a hint");
+  }, 100);
+});
+
+function room3Sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function room3OpenDesk() {
-  openModal("", room3DeskSolved ? room3Images.deskCorrect : room3Images.desk);
+  openModal("", room3DeskSolved ? room3Images.compCorrect : room3Images.computer);
 
   if (!room3DeskSolved) {
     setTimeout(room3CheckPassword, 100);
   }
 }
 
-function room3CheckPassword() {
+async function room3CheckPassword() {
   const password = "opg";
   const entry = (prompt("enter password: ") || "").replace(/\s/g, "").toLowerCase();
   const modalImage = document.getElementById("modal-image");
 
   if (entry === password) {
     room3DeskSolved = true;
-    modalImage.src = room3Images.deskCorrect;
+    modalImage.src = room3Images.compCorrect;
+
+    await room3Sleep(500);
+
+    modalImage.src = room3Images.compPrint;
   } else {
-    modalImage.src = room3Images.deskIncorrect;
+    modalImage.src = room3Images.compIncorrect;
   }
 }
 
 function room3ToggleMop() {
   if (heldItem !== "mop") {
-    alert("You are holding a mop now");
+    alert("You are holding a mop now \n press SPACE to use");
     setHeldItem("mop");
   } else {
     alert("You put the mop back");
@@ -120,5 +143,15 @@ function mopFloor() {
 }
 
 function room3OpenFridge() {
-  openModal("", room3Images.fridge);
+  const noBloodLeft = document.querySelector(".floorBlood") === null;
+
+  openModal("", noBloodLeft ? room3Images.fridgeOpen : room3Images.fridgePost);
+}
+
+function room3ModalChange(){
+  const modalImage = document.getElementById("modal-image");
+
+  if (modalImage.src.includes(room3Images.fridgeOpen)) {
+    modalImage.src = room3Images.fridgeSrl;
+  }
 }

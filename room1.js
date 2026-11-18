@@ -1,63 +1,54 @@
+const room1Images = {
+  fuseBox: "tiles/objects/fuse_box_puzzle.png"
+};
 
-const solvedFuseBoxes = {};
+rooms.room1 = {
+  playerStart: 72,
+  doorTiles: {
+    8: "iron-door-left",
+    9:"iron-door-right",
+    136:"iron-door-left",
+    137:"iron-door-right",
+    50:"wall",
+    51:"iron-door-left",
+    52:"iron-door-right",
+    53:"wall",
+    54:"wall",
+    70:"wall",
+    86:"wall",
+    102:"wall",
+    118:"wall",
+    29:"wall",
+    45:"wall",
+    61:"wall",
+    77:"wall",
+    31:"fuse-box",
+    71:"fuse-box",
+    18:"fuse-box",
 
-function showFusePuzzle(fuseName) {
-  openModal("", null);
+  },
+  objects: {
+  },
+  interactables: {
+    31:"fuse-box",
+    71:"fuse-box",
+    18:"fuse-box"
+  },
+  onInteract: function (name) {
+    if (name === "fuse-box") {
+      room1FuseBox();
+    }
+  }
+};
 
-  const puzzle = document.getElementById("wire-puzzle");
+let toggle = 0
 
-  puzzle.classList.remove("hidden");
+function room1FuseBox(){
+toggle++
+room1OpenFuseBox();
+alert ("you turend on the fuse box, turn on "+(3-toggle)+" more.");
+}
 
-  let selectedWire = null;
-  const matchedColors = [];
-
-  const message = document.getElementById("wire-message");
-
-  message.textContent =
-    "Select a wire on the left, then its match on the right.";
-
-  puzzle.querySelectorAll(".wire-left").forEach(function(wire) {
-    wire.onclick = function() {
-      const color = wire.dataset.color;
-
-      if (matchedColors.includes(color)) return;
-
-      selectedWire = color;
-
-      message.textContent =
-        "Now select the matching wire on the right.";
-    };
-  });
-
-  puzzle.querySelectorAll(".wire-right").forEach(function(wire) {
-    wire.onclick = function() {
-      const color = wire.dataset.color;
-
-      if (!selectedWire) {
-        message.textContent =
-          "Choose a wire on the left first!";
-        return;
-      }
-
-      if (matchedColors.includes(color)) return;
-
-      if (selectedWire === color) {
-        matchedColors.push(color);
-
-        message.textContent = "Correct connection!";
-
-        if (matchedColors.length === 3) {
-          solvedFuseBoxes[fuseName] = true;
-
-          message.textContent =
-            "FUSE BOX CONNECTED! Power restored.";
-        }
-
-      } else {
-        message.textContent = "Wrong wire! Try again.";
-      }
-
-      selectedWire = null;
-    };
-  });
+function room1OpenFuseBox() {
+  openModal("", room1Images.fuseBox);
 }
