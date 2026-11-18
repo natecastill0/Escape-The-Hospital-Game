@@ -18,6 +18,22 @@ body {
   display: none !important;
 }
 
+.dialogueStyle {
+  position: absolute;
+  top: 75%;
+  right: 15%;
+  width: 70%;
+  height: 20%;
+  background-color: whitesmoke;
+  outline: 6px solid #030303;
+  z-index: 10;
+}
+
+p {
+  font-family: monospace;
+  font-size: xx-large;
+}
+
 .row {
   height: 50%;
   width: 100%;
@@ -27,17 +43,6 @@ body {
 .specialFit {
   height: auto;
   width: 100%;
-}
-
-.blockBox {
-  height: 100%;
-  width: 25%;
-  display: block;
-}
-
-.box {
-  height: 100%;
-  width: 25%;
 }
 
 .center-content {

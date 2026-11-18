@@ -1,4 +1,6 @@
 //mark gutierrez js
+let dialogueNum;
+let hasRun = false;
 rooms.room4 = {
   playerStart: 66,
   doorTiles: {
@@ -7,18 +9,40 @@ rooms.room4 = {
     81: "wood-door-right"
   },
   objects: {
-    21: "tiles/objects/vaccine_cabinet.png"
+    21: "tiles/objects/vaccine_cabinet.png",
+    27: "overlay/Guy_With_Leg.png"
   },
   interactables: {
-    21: "vaccine_cabinet"
+    21: "vaccine_cabinet",
+    27: "Guy_With_Leg"
   },
   onInteract: function (name) {
     if (name === "vaccine_cabinet") {
       document.getElementById("vaccineModal").classList.remove("hidden");
       document.getElementById("itemDiv").classList.add("hidden");
     }
+    else if (name == "Guy_With_Leg") {
+      dialogueNum = 0;
+      dialogueHandler();
+    }
   }
 };
+
+function dialogueHandler() {
+  if (dialogueNum == 0) {
+    if (!hasRun) {
+      hasRun = true;
+      document.getElementById("dialogueText").textContent = "It's unfortunate this guy passed away in this dump, though to not end up like this I must take his robotic leg!";
+      setTimeout(() => {
+        document.getElementById("dialogueBox").classList.add("hidden");
+        document.getElementById("dialogueText").textContent = "";
+        hasRun = false;
+      }, 2500);
+    }
+  } else {
+    document.getElementById("dialogueText").textContent = "the else was activated";
+  }
+}
 
 let vaccineModal = true;
 
