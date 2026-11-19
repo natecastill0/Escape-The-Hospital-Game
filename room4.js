@@ -6,15 +6,20 @@ rooms.room4 = {
   doorTiles: {
     49: "wood-door-left",
     65: "wood-door-middle",
-    81: "wood-door-right"
+    81: "wood-door-right",
+    43: "floorBlood"
   },
   objects: {
     21: "tiles/objects/vaccine_cabinet.png",
-    27: "overlay/Guy_With_Leg.png"
+    27: "overlay/Guy_With_Leg.png",
+    18: "tiles/objects/left_table.png",
+    19: "tiles/objects/right_table.png"
   },
   interactables: {
     21: "vaccine_cabinet",
-    27: "Guy_With_Leg"
+    27: "Guy_With_Leg",
+    18: "left_table",
+    19: "right_table"
   },
   onInteract: function (name) {
     if (name === "vaccine_cabinet") {
@@ -25,6 +30,9 @@ rooms.room4 = {
       dialogueNum = 0;
       dialogueHandler();
     }
+    else if (name == "left_table" || name == "right_table") {
+      alert("yes");
+    }
   }
 };
 
@@ -32,16 +40,24 @@ function dialogueHandler() {
   if (dialogueNum == 0) {
     if (!hasRun) {
       hasRun = true;
+      document.getElementById("dialogueBox").classList.remove("hidden");
       document.getElementById("dialogueText").textContent = "It's unfortunate this guy passed away in this dump, though to not end up like this I must take his robotic leg!";
-      setTimeout(() => {
+      dialogueTimer = setTimeout(() => {
         document.getElementById("dialogueBox").classList.add("hidden");
         document.getElementById("dialogueText").textContent = "";
         hasRun = false;
-      }, 2500);
+      }, 5000);
     }
   } else {
     document.getElementById("dialogueText").textContent = "the else was activated";
   }
+}
+
+function skipDialogue() {
+  clearTimeout(dialogueTimer);
+  document.getElementById("dialogueBox").classList.add("hidden");
+  document.getElementById("dialogueText").textContent = "";
+  hasRun = false;
 }
 
 let vaccineModal = true;

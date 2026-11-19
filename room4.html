@@ -12,13 +12,19 @@
 
   <div id="dialogueBox" class="dialogueStyle center-content hidden">
     <p id ="dialogueText"></p>
+    <button onclick="skipDialogue()">Close Dialogue</button>
   </div>
 
   <div id="itemDiv" style = "width: 7.5%; height: 15%; position: absolute; top: 84%; right: 45%; outline: 6px solid #030303;" class="center-content hidden">
     <img id="itemSlot" style="height: 100%; width: auto;"src=""/>
   </div>
 
-<div id="vaccineModal" class="modal center-content hidden">
+  <div style="width: 100%; height: 100%; z-index: 10; opacity: 1; background-image: tiles/objects/table_left;" id="tableModal" class="hidden">
+    <div></div>
+  </div>
+
+
+  <div id="vaccineModal" class="modal center-content hidden">
       <span class="close" onclick="closeModal()">&times;</span>
       <div class="nextBox clicky" onclick="nextModal()">
         <img src="overlay/right arrow.png"/>
